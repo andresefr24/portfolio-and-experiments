@@ -25,7 +25,7 @@ export default function AppBarItem({
         <Typography
           variant="body1"
           sx={{ textTransform: "capitalize" }}
-          color="grey.900"
+          color="secondary.dark"
         >
           {children}
         </Typography>

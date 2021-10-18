@@ -18,7 +18,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: "transparent",
-          padding: "0 14px",
+          padding: "0 8px",
           boxShadow: "none",
           height: 48,
         },

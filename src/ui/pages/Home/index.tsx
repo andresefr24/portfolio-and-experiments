@@ -9,7 +9,10 @@ export default function Home() {
         item
         container
         xs={12}
-        sx={{ minHeight: "100vh" }}
+        sx={{
+          minHeight: "100vh",
+          background: () => `linear-gradient(45deg, #028090, #E4FDE1)`,
+        }}
         alignItems="center"
         justifyContent="center"
       >
