@@ -6,6 +6,7 @@ import {
   Grid,
   IconButton,
   SwipeableDrawer,
+  Divider,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import routes from "../../routes";
@@ -17,6 +18,10 @@ export default function AppBar(props: AppBarProps) {
 
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
+  const filteredRoutes = routes.filter(
+    ({ path }) => path !== location.pathname
+  );
+
   return (
     <>
       <MUIAppBar {...props}>
@@ -25,7 +30,7 @@ export default function AppBar(props: AppBarProps) {
             <Menu
               sx={{
                 fontSize: 24,
-                color: ({ palette }) => palette.secondary.main,
+                color: ({ palette }) => palette.primary.dark,
               }}
             />
           </IconButton>
@@ -47,9 +52,8 @@ export default function AppBar(props: AppBarProps) {
               overflowX: "hidden",
             }}
           >
-            {routes
-              .filter(({ path }) => path !== location.pathname)
-              .map(({ name, path }) => (
+            {filteredRoutes.map(({ name, path }, i) => (
+              <>
                 <AppBarItem
                   key={`app-bar-item-${name}`}
                   path={path}
@@ -59,7 +63,11 @@ export default function AppBar(props: AppBarProps) {
                 >
                   {name}
                 </AppBarItem>
-              ))}
+                {i < filteredRoutes.length - 1 && (
+                  <Divider sx={{ backgroundColor: "red" }} />
+                )}
+              </>
+            ))}
           </Box>
         </SwipeableDrawer>
       </React.Fragment>

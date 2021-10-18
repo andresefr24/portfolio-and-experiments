@@ -13,19 +13,20 @@ export default function AppBarItem({
 }) {
   return (
     <Box
-      p={2}
+      p={3}
       onClick={onClick}
       sx={{
         "& a": { textDecoration: "none" },
-        height: 48,
         width: "100%",
+        display: "flex",
+        alignItems: "center",
       }}
     >
       <Link to={path}>
         <Typography
           variant="body1"
           sx={{ textTransform: "capitalize" }}
-          color="secondary.dark"
+          color="primary.light"
         >
           {children}
         </Typography>
