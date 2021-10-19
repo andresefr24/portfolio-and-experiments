@@ -20,10 +20,11 @@ const animation = (degs: number, size: number, cellSize: number) => keyframes`
 export default function HomeBackground() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("md"));
+  if (isSm) return null;
   return (
     <SizeMe monitorHeight monitorWidth refreshRate={32}>
       {({ size }) => {
-        const cellSize = isSm ? 24 : 48;
+        const cellSize = 48;
         const numberOfRows =
           Math.ceil(Math.round(Number(size?.height)) / cellSize) || 0;
         const numberOfColumns =
@@ -65,10 +66,10 @@ export default function HomeBackground() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    transform: `rotate(${j * (isSm ? 2 : 1)}deg)`,
+                    transform: `rotate(${j}deg)`,
                     transition: "all 0.2s",
                     animation: `${animation(
-                      j * (isSm ? 2 : 1),
+                      j,
                       cellSize - j / 6,
                       cellSize
                     )} 10s linear infinite alternate`,
