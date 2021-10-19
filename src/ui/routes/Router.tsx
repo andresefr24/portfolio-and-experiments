@@ -4,7 +4,7 @@ import routes from "./index";
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio-and-experiments">
       <Switch>
         {routes.map(({ name, path, Component }) => (
           <Route path={path} exact key={name}>
