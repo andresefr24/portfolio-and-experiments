@@ -53,9 +53,8 @@ export default function AppBar(props: AppBarProps) {
             }}
           >
             {filteredRoutes.map(({ name, path }, i) => (
-              <>
+              <React.Fragment key={`app-bar-item-${name}`}>
                 <AppBarItem
-                  key={`app-bar-item-${name}`}
                   path={path}
                   onClick={() => {
                     setDrawerIsOpen(false);
@@ -66,7 +65,7 @@ export default function AppBar(props: AppBarProps) {
                 {i < filteredRoutes.length - 1 && (
                   <Divider sx={{ backgroundColor: "red" }} />
                 )}
-              </>
+              </React.Fragment>
             ))}
           </Box>
         </SwipeableDrawer>

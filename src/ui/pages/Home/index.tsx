@@ -1,6 +1,7 @@
 import React from "react";
 import MainContainer from "../../components/MainContainer";
 import { Box, Grid, Typography } from "@mui/material";
+import HomeBackground from "./components/HomeBackground";
 
 export default function Home() {
   return (
@@ -16,18 +17,20 @@ export default function Home() {
         alignItems="center"
         justifyContent="center"
       >
+        <HomeBackground />
         <Box
           p={4}
           sx={{
             backgroundColor: ({ palette }) => palette.primary.dark,
             borderRadius: 2,
             width: "50%",
+            zIndex: 1,
           }}
         >
           <Grid item container xs={12}>
             <Grid item container xs={12}>
               <Typography variant="h4" color="primary.light">
-                Welcome! asd
+                Welcome!
               </Typography>
               <br />
               <br />
@@ -35,7 +38,7 @@ export default function Home() {
             </Grid>
             <Grid item container xs={12}>
               <Typography variant="body1" color="primary.light">
-                I`m Andrés, a venezuelan Madrid based frontend developer that
+                I`m Andrés, a Madrid based venezuelan frontend developer that
                 loves to doodle and make visual experiments.
               </Typography>
               <br />
