@@ -27,7 +27,7 @@ export default function Home() {
           <Grid item container xs={12}>
             <Grid item container xs={12}>
               <Typography variant="h4" color="primary.light">
-                Welcome!
+                Welcome! asd
               </Typography>
               <br />
               <br />
