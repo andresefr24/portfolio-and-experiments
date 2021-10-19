@@ -2,13 +2,15 @@ import React from "react";
 import { Paper, Box } from "@mui/material";
 import { SizeMe } from "react-sizeme";
 import { keyframes } from "@emotion/react";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
-const animation = (degs: number, size: number) => keyframes`
+const animation = (degs: number, size: number, cellSize: number) => keyframes`
   0% {
     transform: rotate(${degs}deg) scale(1);
   }
   50% { 
-    transform: rotate(0deg) scale(${48 / size - 0.025});
+    transform: rotate(0deg) scale(${cellSize / size - 0.025});
   }
   100%{
     transform: rotate(${degs}deg) scale(1);
@@ -16,13 +18,16 @@ const animation = (degs: number, size: number) => keyframes`
 `;
 
 export default function HomeBackground() {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <SizeMe monitorHeight monitorWidth refreshRate={32}>
       {({ size }) => {
+        const cellSize = isSm ? 24 : 48;
         const numberOfRows =
-          Math.ceil(Math.round(Number(size?.height)) / 48) || 0;
+          Math.ceil(Math.round(Number(size?.height)) / cellSize) || 0;
         const numberOfColumns =
-          Math.ceil(Math.round(Number(size?.width)) / 48) || 0;
+          Math.ceil(Math.round(Number(size?.width)) / cellSize) || 0;
 
         const rows: null[][] = [];
 
@@ -51,26 +56,27 @@ export default function HomeBackground() {
                   key={`home-background-cell-${String(i)}-${String(j)}`}
                   sx={{
                     position: "absolute",
-                    top: 48 * i,
-                    left: 48 * j,
-                    height: 48 - j / 6,
-                    width: 48 - j / 6,
-                    backgroundColor: `#000000${58 - j}`,
+                    top: cellSize * i,
+                    left: cellSize * j,
+                    height: cellSize - j / 6,
+                    width: cellSize - j / 6,
+                    backgroundColor: `#000000${cellSize + 10 - j}`,
                     boxSizing: "border-box",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    transform: `rotate(${j}deg)`,
+                    transform: `rotate(${j * (isSm ? 2 : 1)}deg)`,
                     transition: "all 0.2s",
                     animation: `${animation(
-                      j,
-                      48 - j / 6
+                      j * (isSm ? 2 : 1),
+                      cellSize - j / 6,
+                      cellSize
                     )} 10s linear infinite alternate`,
 
                     "&:hover": {
                       backgroundColor: ({ palette }) => palette.secondary.main,
-                      height: 48,
-                      width: 48,
+                      height: cellSize,
+                      width: cellSize,
                     },
                   }}
                 />
