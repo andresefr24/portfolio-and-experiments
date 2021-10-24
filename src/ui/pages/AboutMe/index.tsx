@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainContainer from "../../components/MainContainer";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import portrait from "../../../assets/images/AndresE1.png";
@@ -7,9 +7,26 @@ import hexagonSecondary from "../../../assets/vectors/hex-secondary-main.svg";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
+const xOrigin = Math.round(window.innerWidth * 0.75);
+const yOrigin = Math.round(window.innerHeight * 0.5);
+
 export default function AboutMe() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [x, setX] = useState<number>(0);
+  const [y, setY] = useState<number>(0);
+
+  useEffect(() => {
+    const update = (e: MouseEvent) => {
+      setX(e.x);
+      setY(e.y);
+    };
+    window.addEventListener("mousemove", update);
+    return () => {
+      window.removeEventListener("mousemove", update);
+    };
+  }, [setX, setY]);
 
   return (
     <MainContainer>
@@ -20,9 +37,10 @@ export default function AboutMe() {
           backgroundSize: "150%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "100% 80%",
-          width: "70%",
+          width: `70%`,
           height: "100%",
           zIndex: 0,
+          transition: "all 1s",
         }}
       >
         <Box
@@ -35,6 +53,26 @@ export default function AboutMe() {
             backgroundColor: ({ palette }) => palette.primary.dark,
             mask: `url(${hexagonPrimary})`,
             maskSize: "100%",
+            transform: `translate(${(x / xOrigin) * 30}px, ${
+              (y / yOrigin) * 30
+            }px)`,
+            transition: "all 0.75s",
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            top: "80%",
+            left: "72.5%",
+            height: "5vw",
+            width: "5vw",
+            backgroundColor: ({ palette }) => palette.primary.light,
+            mask: `url(${hexagonPrimary})`,
+            maskSize: "100%",
+            transform: `translate(${(x / xOrigin) * 40}px, ${
+              (y / yOrigin) * 40
+            }px)`,
+            transition: "all 0.5s",
           }}
         />
       </Box>
@@ -105,7 +143,12 @@ export default function AboutMe() {
               width: isSm ? "50vw" : "25vw",
               height: isSm ? "60vw" : "30vw",
               overflow: "hidden",
-              zIndex: 1,
+              zIndex: 5,
+              transform: `translate(${(x / xOrigin) * 20}px, ${
+                (y / yOrigin) * 20
+              }px)`,
+              transition: "all 1s",
+              transitionDelay: "all 1s",
             }}
           >
             <Box

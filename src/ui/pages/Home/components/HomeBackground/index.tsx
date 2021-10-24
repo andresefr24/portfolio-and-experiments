@@ -39,6 +39,7 @@ const fadeIn = keyframes`
 export default function HomeBackground() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <SizeMe monitorHeight monitorWidth refreshRate={32}>
       {({ size }) => {
