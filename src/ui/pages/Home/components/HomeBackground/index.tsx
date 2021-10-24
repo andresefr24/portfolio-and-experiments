@@ -11,13 +11,19 @@ const squareAnimation = (
   cellSize: number
 ) => keyframes`
   0% {
-    transform: rotate(${degs}deg) scale(1);
+    transform: rotate(${degs * 1.25}deg) scale(1);
   }
-  50% { 
+  25% { 
+    transform: rotate(0deg) scale(${cellSize / size - 0.025});
+  }
+  50%{
+    transform: rotate(${-degs * 1.25}deg) scale(1);
+  }
+  75% {
     transform: rotate(0deg) scale(${cellSize / size - 0.025});
   }
   100%{
-    transform: rotate(${degs}deg) scale(1);
+    transform: rotate(${degs * 1.25}deg) scale(1);
   }
 `;
 
@@ -60,7 +66,7 @@ export default function HomeBackground() {
               position: "absolute",
               zIndex: 0,
               overflow: "hidden",
-              background: () => `linear-gradient(45deg, #028090, #E4FDE1)`,
+              background: `linear-gradient(45deg, #028090, #E4FDE1)`,
             }}
           >
             <Paper
@@ -97,7 +103,7 @@ export default function HomeBackground() {
                           j + 8,
                           cellSize - j / 6,
                           cellSize
-                        )} 10s linear infinite alternate`,
+                        )} 15s linear infinite alternate`,
                       }}
                     />
                   ))

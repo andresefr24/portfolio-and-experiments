@@ -28,7 +28,7 @@ export default function Home() {
             zIndex: 1,
           }}
         >
-          <Fade in>
+          <Fade in timeout={1000}>
             <Grid item container xs={12}>
               <Grid item container xs={12}>
                 <Typography
