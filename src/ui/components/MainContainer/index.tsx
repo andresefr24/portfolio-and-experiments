@@ -16,7 +16,7 @@ export default function MainContainer({
   return (
     <Container
       maxWidth={maxWidth}
-      sx={{ paddingTop: topPadding ? "48px" : 0, ...sx }}
+      sx={{ paddingTop: topPadding ? "48px" : 0, ...sx, overflowX: "hidden" }}
       disableGutters
       {...rest}
     >

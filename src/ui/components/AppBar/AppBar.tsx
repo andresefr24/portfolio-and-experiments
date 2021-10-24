@@ -29,7 +29,7 @@ export default function AppBar(props: AppBarProps) {
           <IconButton size="small" onClick={() => setDrawerIsOpen(true)}>
             <Menu
               sx={{
-                fontSize: 24,
+                fontSize: 30,
                 color: ({ palette }) => palette.primary.light,
               }}
             />

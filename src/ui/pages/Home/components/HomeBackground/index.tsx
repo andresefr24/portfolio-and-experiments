@@ -5,7 +5,11 @@ import { keyframes } from "@emotion/react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const animation = (degs: number, size: number, cellSize: number) => keyframes`
+const squareAnimation = (
+  degs: number,
+  size: number,
+  cellSize: number
+) => keyframes`
   0% {
     transform: rotate(${degs}deg) scale(1);
   }
@@ -17,10 +21,18 @@ const animation = (degs: number, size: number, cellSize: number) => keyframes`
   }
 `;
 
+const fadeIn = keyframes`
+  0& {
+    background-color: rgba(0,0,0,1);
+   }
+  100% {
+    background-color: rgba(0,0,0,0.5);
+  }
+`;
+
 export default function HomeBackground() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("md"));
-  if (isSm) return null;
   return (
     <SizeMe monitorHeight monitorWidth refreshRate={32}>
       {({ size }) => {
@@ -46,55 +58,50 @@ export default function HomeBackground() {
               width: "100%",
               height: "100%",
               position: "absolute",
-              backgroundColor: "transparent",
               zIndex: 0,
               overflow: "hidden",
+              background: () => `linear-gradient(45deg, #028090, #E4FDE1)`,
             }}
           >
             <Paper
               sx={{
                 height: "110%",
                 width: "110%",
-                backgroundColor: "transparent",
+                backgroundColor: "black",
+                animation: `${fadeIn} 1s linear forwards`,
+                animationDelay: "1s",
                 position: "absolute",
                 top: -cellSize / 2,
                 left: -cellSize / 2,
               }}
             >
-              {rows.map((row, i) =>
-                row.map((_, j) => (
-                  <Box
-                    key={`home-background-cell-${String(i)}-${String(j)}`}
-                    sx={{
-                      position: "absolute",
-                      top: cellSize * i,
-                      left: cellSize * j,
-                      height: cellSize - j / 6,
-                      width: cellSize - j / 6,
-                      backgroundColor: `#000000${cellSize + 10 - j}`,
-                      boxSizing: "border-box",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transform: `rotate(${j}deg)`,
-                      transition: "all 0.2s",
-                      animation: `${animation(
-                        j + 8,
-                        cellSize - j / 6,
-                        cellSize
-                      )} 10s linear infinite alternate`,
-
-                      "&:hover": {
-                        backgroundColor: ({ palette }) =>
-                          palette.secondary.main,
-                        opacity: 0.7,
-                        height: cellSize,
-                        width: cellSize,
-                      },
-                    }}
-                  />
-                ))
-              )}
+              {!isSm &&
+                rows.map((row, i) =>
+                  row.map((_, j) => (
+                    <Box
+                      key={`home-background-cell-${String(i)}-${String(j)}`}
+                      sx={{
+                        position: "absolute",
+                        top: cellSize * i,
+                        left: cellSize * j,
+                        height: cellSize - j / 6,
+                        width: cellSize - j / 6,
+                        backgroundColor: `#000000${cellSize + 10 - j}`,
+                        boxSizing: "border-box",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        transform: `rotate(${j}deg)`,
+                        transition: "all 0.2s",
+                        animation: `${squareAnimation(
+                          j + 8,
+                          cellSize - j / 6,
+                          cellSize
+                        )} 10s linear infinite alternate`,
+                      }}
+                    />
+                  ))
+                )}
             </Paper>
           </Paper>
         );
