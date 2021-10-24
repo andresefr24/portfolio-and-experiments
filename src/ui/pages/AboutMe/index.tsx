@@ -1,8 +1,9 @@
 import React from "react";
 import MainContainer from "../../components/MainContainer";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import portrait from "../../../assets/images/AndresE1.png";
-import hexagon from "../../../assets/vectors/hex2.svg";
+import hexagonPrimary from "../../../assets/vectors/hex-primary-main.svg";
+import hexagonSecondary from "../../../assets/vectors/hex-secondary-main.svg";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
@@ -12,6 +13,31 @@ export default function AboutMe() {
 
   return (
     <MainContainer>
+      <Box
+        sx={{
+          position: "absolute",
+          backgroundImage: `url(${hexagonPrimary})`,
+          backgroundSize: "150%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "100% 80%",
+          width: "70%",
+          height: "100%",
+          zIndex: 0,
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "70%",
+            left: "75%",
+            height: "10vw",
+            width: "10vw",
+            backgroundColor: ({ palette }) => palette.primary.dark,
+            mask: `url(${hexagonPrimary})`,
+            maskSize: "100%",
+          }}
+        />
+      </Box>
       <Grid
         item
         container
@@ -24,15 +50,22 @@ export default function AboutMe() {
           <Box
             sx={{
               width: "100%",
-              // backgroundColor: ({ palette }) => palette.primary.main,
               p: 4,
+              zIndex: 1,
             }}
           >
             <Typography variant="h3" color="primary.light">
               About me
             </Typography>
-            <br />
-            <br />
+            <Divider
+              sx={{
+                backgroundColor: ({ palette }) => palette.secondary.main,
+                mt: 3,
+                mb: 4,
+                height: 2,
+                width: "30%",
+              }}
+            />
 
             <Typography variant="body1" color="primary.light">
               {`I'm Andrés Ferrero, a Madrid based venezuelan frontend developer
@@ -65,13 +98,14 @@ export default function AboutMe() {
         >
           <Box
             sx={{
-              background: `url(${hexagon})`,
+              background: `url(${hexagonSecondary})`,
               backgroundPosition: "bottom",
               backgroundRepeat: "no-repeat",
               backgroundSize: "114%",
-              width: isSm ? "50vw" : "30vw",
-              height: isSm ? "60vw" : "36vw",
+              width: isSm ? "50vw" : "25vw",
+              height: isSm ? "60vw" : "30vw",
               overflow: "hidden",
+              zIndex: 1,
             }}
           >
             <Box
@@ -84,7 +118,7 @@ export default function AboutMe() {
                 backgroundRepeat: "no-repeat",
                 backgroundImage: `url(${portrait})`,
                 backgroundBlendMode: "multiply",
-                mask: `url(${hexagon})`,
+                mask: `url(${hexagonSecondary})`,
                 maskSize: "140%",
                 maskRepeat: "no-repeat",
                 maskPosition: "bottom center",
