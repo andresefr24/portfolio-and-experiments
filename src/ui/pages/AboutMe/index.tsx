@@ -54,7 +54,7 @@ export default function AboutMe() {
           <Box
             sx={{
               position: "absolute",
-              top: "70%",
+              top: "65%",
               left: "75%",
               height: "10vw",
               width: "10vw",
@@ -70,8 +70,8 @@ export default function AboutMe() {
           <Box
             sx={{
               position: "absolute",
-              top: "80%",
-              left: "72.5%",
+              top: "75%",
+              left: "72%",
               height: "5vw",
               width: "5vw",
               backgroundColor: ({ palette }) => palette.primary.light,
