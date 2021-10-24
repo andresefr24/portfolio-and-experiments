@@ -6,6 +6,7 @@ import hexagonPrimary from "../../../assets/vectors/hex-primary-main.svg";
 import hexagonSecondary from "../../../assets/vectors/hex-secondary-main.svg";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import hexagonBackground from "../../../assets/images/hexabump.png";
 
 const xOrigin = Math.round(window.innerWidth * 0.75);
 const yOrigin = Math.round(window.innerHeight * 0.5);
@@ -31,7 +32,11 @@ export default function AboutMe() {
   }, [setX, setY, isSm]);
 
   return (
-    <MainContainer>
+    <MainContainer
+      sx={{
+        backgroundImage: `url(${hexagonBackground})`,
+      }}
+    >
       {!isSm && (
         <Box
           sx={{
