@@ -18,64 +18,68 @@ export default function AboutMe() {
   const [y, setY] = useState<number>(0);
 
   useEffect(() => {
-    const update = (e: MouseEvent) => {
-      setX(e.x);
-      setY(e.y);
-    };
-    window.addEventListener("mousemove", update);
-    return () => {
-      window.removeEventListener("mousemove", update);
-    };
-  }, [setX, setY]);
+    if (!isSm) {
+      const update = (e: MouseEvent) => {
+        setX(e.x);
+        setY(e.y);
+      };
+      window.addEventListener("mousemove", update);
+      return () => {
+        window.removeEventListener("mousemove", update);
+      };
+    }
+  }, [setX, setY, isSm]);
 
   return (
     <MainContainer>
-      <Box
-        sx={{
-          position: "absolute",
-          backgroundImage: `url(${hexagonPrimary})`,
-          backgroundSize: "150%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "100% 80%",
-          width: `70%`,
-          height: "100%",
-          zIndex: 0,
-          transition: "all 1s",
-        }}
-      >
+      {!isSm && (
         <Box
           sx={{
             position: "absolute",
-            top: "70%",
-            left: "75%",
-            height: "10vw",
-            width: "10vw",
-            backgroundColor: ({ palette }) => palette.primary.dark,
-            mask: `url(${hexagonPrimary})`,
-            maskSize: "100%",
-            transform: `translate(${(x / xOrigin) * 30}px, ${
-              (y / yOrigin) * 30
-            }px)`,
-            transition: "all 0.75s",
+            backgroundImage: `url(${hexagonPrimary})`,
+            backgroundSize: "150%",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "100% 80%",
+            width: `70%`,
+            height: "100%",
+            zIndex: 0,
+            transition: "all 1s",
           }}
-        />
-        <Box
-          sx={{
-            position: "absolute",
-            top: "80%",
-            left: "72.5%",
-            height: "5vw",
-            width: "5vw",
-            backgroundColor: ({ palette }) => palette.primary.light,
-            mask: `url(${hexagonPrimary})`,
-            maskSize: "100%",
-            transform: `translate(${(x / xOrigin) * 40}px, ${
-              (y / yOrigin) * 40
-            }px)`,
-            transition: "all 0.5s",
-          }}
-        />
-      </Box>
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "70%",
+              left: "75%",
+              height: "10vw",
+              width: "10vw",
+              backgroundColor: ({ palette }) => palette.primary.dark,
+              mask: `url(${hexagonPrimary})`,
+              maskSize: "100%",
+              transform: `translate(${(x / xOrigin) * 30}px, ${
+                (y / yOrigin) * 30
+              }px)`,
+              transition: "all 0.75s",
+            }}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              top: "80%",
+              left: "72.5%",
+              height: "5vw",
+              width: "5vw",
+              backgroundColor: ({ palette }) => palette.primary.light,
+              mask: `url(${hexagonPrimary})`,
+              maskSize: "100%",
+              transform: `translate(${(x / xOrigin) * 40}px, ${
+                (y / yOrigin) * 40
+              }px)`,
+              transition: "all 0.5s",
+            }}
+          />
+        </Box>
+      )}
       <Grid
         item
         container
@@ -97,7 +101,8 @@ export default function AboutMe() {
             </Typography>
             <Divider
               sx={{
-                backgroundColor: ({ palette }) => palette.secondary.main,
+                backgroundColor: ({ palette }) =>
+                  isSm ? palette.primary.main : palette.secondary.main,
                 mt: 3,
                 mb: 4,
                 height: 2,
@@ -131,7 +136,7 @@ export default function AboutMe() {
           item
           container
           xs={isSm ? 12 : 6}
-          sx={{ p: 4 }}
+          sx={{ p: isSm ? 2 : 4 }}
           justifyContent="center"
         >
           <Box
@@ -144,9 +149,9 @@ export default function AboutMe() {
               height: isSm ? "60vw" : "30vw",
               overflow: "hidden",
               zIndex: 5,
-              transform: `translate(${(x / xOrigin) * 20}px, ${
-                (y / yOrigin) * 20
-              }px)`,
+              transform: isSm
+                ? ""
+                : `translate(${(x / xOrigin) * 20}px, ${(y / yOrigin) * 20}px)`,
               transition: "all 1s",
               transitionDelay: "all 1s",
             }}
