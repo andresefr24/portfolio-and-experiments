@@ -32,9 +32,9 @@ export default function HomeBackground() {
 
         const rows: null[][] = [];
 
-        for (let i = 0; i < numberOfRows; i++) {
+        for (let i = 0; i <= numberOfRows; i++) {
           const column: null[] = [];
-          for (let j = 0; j < numberOfColumns; j++) {
+          for (let j = 0; j <= numberOfColumns; j++) {
             column.push(null);
           }
           rows.push(column);
@@ -51,38 +51,51 @@ export default function HomeBackground() {
               overflow: "hidden",
             }}
           >
-            {rows.map((row, i) =>
-              row.map((_, j) => (
-                <Box
-                  key={`home-background-cell-${String(i)}-${String(j)}`}
-                  sx={{
-                    position: "absolute",
-                    top: cellSize * i,
-                    left: cellSize * j,
-                    height: cellSize - j / 6,
-                    width: cellSize - j / 6,
-                    backgroundColor: `#000000${cellSize + 10 - j}`,
-                    boxSizing: "border-box",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transform: `rotate(${j}deg)`,
-                    transition: "all 0.2s",
-                    animation: `${animation(
-                      j,
-                      cellSize - j / 6,
-                      cellSize
-                    )} 10s linear infinite alternate`,
+            <Paper
+              sx={{
+                height: "110%",
+                width: "110%",
+                backgroundColor: "transparent",
+                position: "absolute",
+                top: -cellSize / 2,
+                left: -cellSize / 2,
+              }}
+            >
+              {rows.map((row, i) =>
+                row.map((_, j) => (
+                  <Box
+                    key={`home-background-cell-${String(i)}-${String(j)}`}
+                    sx={{
+                      position: "absolute",
+                      top: cellSize * i,
+                      left: cellSize * j,
+                      height: cellSize - j / 6,
+                      width: cellSize - j / 6,
+                      backgroundColor: `#000000${cellSize + 10 - j}`,
+                      boxSizing: "border-box",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transform: `rotate(${j}deg)`,
+                      transition: "all 0.2s",
+                      animation: `${animation(
+                        j + 8,
+                        cellSize - j / 6,
+                        cellSize
+                      )} 10s linear infinite alternate`,
 
-                    "&:hover": {
-                      backgroundColor: ({ palette }) => palette.secondary.main,
-                      height: cellSize,
-                      width: cellSize,
-                    },
-                  }}
-                />
-              ))
-            )}
+                      "&:hover": {
+                        backgroundColor: ({ palette }) =>
+                          palette.secondary.main,
+                        opacity: 0.7,
+                        height: cellSize,
+                        width: cellSize,
+                      },
+                    }}
+                  />
+                ))
+              )}
+            </Paper>
           </Paper>
         );
       }}

@@ -30,7 +30,7 @@ export default function AppBar(props: AppBarProps) {
             <Menu
               sx={{
                 fontSize: 24,
-                color: ({ palette }) => palette.primary.dark,
+                color: ({ palette }) => palette.primary.light,
               }}
             />
           </IconButton>
