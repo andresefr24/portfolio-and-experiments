@@ -6,8 +6,6 @@ import HomeBackground from "./components/HomeBackground";
 export default function Home() {
   const isMdOrLess = useMediaQuery("(max-width:484px)");
 
-  console.log(isMdOrLess);
-
   return (
     <MainContainer>
       <Grid
