@@ -67,16 +67,19 @@ export default function AppBar(props: AppBarProps) {
                   <>
                     <AppBarItem>{name}</AppBarItem>
                     <Box pl={3}>
-                      {children.map(
-                        ({ name: childrenName, path: childrenPath }) => (
+                      {children
+                        .filter(
+                          ({ path: childrenPath }) =>
+                            `${path}${childrenPath}` !== location.pathname
+                        )
+                        .map(({ name: childrenName, path: childrenPath }) => (
                           <AppBarItem
                             key={`${path}${childrenPath}`}
                             path={`${path}${childrenPath}`}
                           >
                             {childrenName}
                           </AppBarItem>
-                        )
-                      )}
+                        ))}
                     </Box>
                   </>
                 )}
