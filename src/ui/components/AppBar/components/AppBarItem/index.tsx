@@ -7,9 +7,9 @@ export default function AppBarItem({
   children,
   onClick,
 }: {
-  path: string;
+  path?: string;
   children: ReactNode | string;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
   return (
     <Box
@@ -22,7 +22,17 @@ export default function AppBarItem({
         alignItems: "center",
       }}
     >
-      <Link to={path}>
+      {path ? (
+        <Link to={path}>
+          <Typography
+            variant="body1"
+            sx={{ textTransform: "capitalize" }}
+            color="primary.light"
+          >
+            {children}
+          </Typography>
+        </Link>
+      ) : (
         <Typography
           variant="body1"
           sx={{ textTransform: "capitalize" }}
@@ -30,7 +40,7 @@ export default function AppBarItem({
         >
           {children}
         </Typography>
-      </Link>
+      )}
     </Box>
   );
 }

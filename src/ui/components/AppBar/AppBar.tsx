@@ -52,16 +52,34 @@ export default function AppBar(props: AppBarProps) {
               overflowX: "hidden",
             }}
           >
-            {filteredRoutes.map(({ name, path }, i) => (
+            {filteredRoutes.map(({ name, path, children }, i) => (
               <React.Fragment key={`app-bar-item-${name}`}>
-                <AppBarItem
-                  path={path}
-                  onClick={() => {
-                    setDrawerIsOpen(false);
-                  }}
-                >
-                  {name}
-                </AppBarItem>
+                {!children ? (
+                  <AppBarItem
+                    path={path}
+                    onClick={() => {
+                      setDrawerIsOpen(false);
+                    }}
+                  >
+                    {name}
+                  </AppBarItem>
+                ) : (
+                  <>
+                    <AppBarItem>{name}</AppBarItem>
+                    <Box pl={3}>
+                      {children.map(
+                        ({ name: childrenName, path: childrenPath }) => (
+                          <AppBarItem
+                            key={`${path}${childrenPath}`}
+                            path={`${path}${childrenPath}`}
+                          >
+                            {childrenName}
+                          </AppBarItem>
+                        )
+                      )}
+                    </Box>
+                  </>
+                )}
                 {i < filteredRoutes.length - 1 && (
                   <Divider sx={{ backgroundColor: "red" }} />
                 )}
