@@ -1,7 +1,8 @@
 import React from "react";
 import Home from "../pages/Home";
 import AboutMe from "../pages/AboutMe";
-import Experiment1 from "../pages/Experiment1";
+import Experiment1 from "../pages/experiments/Experiment1";
+import Experiment2 from "../pages/experiments/Experiment2";
 
 const routes = [
   { name: "home", path: "/", Component: Home },
@@ -10,7 +11,10 @@ const routes = [
     name: "experiments",
     path: "/experiments",
     Component: React.Fragment,
-    children: [{ name: "experiment 1", path: "/1", Component: Experiment1 }],
+    children: [
+      { name: "experiment 1", path: "/1", Component: Experiment1 },
+      { name: "experiment 2", path: "/2", Component: Experiment2 },
+    ],
   },
 ];
 
